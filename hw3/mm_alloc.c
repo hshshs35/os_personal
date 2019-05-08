@@ -59,7 +59,6 @@ void *mm_malloc(size_t size) {
     list_push_back(&blk_list, header);
 
     size_t meta_size = METADATA_SIZE;
-    printf("the meta_header size is %d\n", meta_size);
     void *address = (void *)header+METADATA_SIZE;
 
     return address;
