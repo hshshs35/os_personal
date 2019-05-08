@@ -58,7 +58,6 @@ void *mm_malloc(size_t size) {
     header->free = 0;
     list_push_back(&blk_list, header);
 
-    size_t meta_size = METADATA_SIZE;
     void *address = (void *)header+METADATA_SIZE;
 
     return address;
@@ -67,7 +66,7 @@ void *mm_malloc(size_t size) {
 void *mm_realloc(void *ptr, size_t size) {
     /* YOUR CODE HERE */
     struct list_elem *meta = ptr - METADATA_SIZE;
-    mm_free(void *ptr);
+    mm_free(ptr);
     void *res = mm_malloc(size);
     void *extend = res + meta->size;
     memcpy(res, ptr, meta->size);
