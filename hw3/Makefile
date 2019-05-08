@@ -17,4 +17,4 @@ mm_test: mm_test.c
 	gcc $(CFLAGS) $(TEST_CFLAGS) -o $@ $^ $(TEST_LDFLAGS)
 
 clean:
-	rm -rf hw3lib.so mm_alloc.o mm_test
+	rm -rf hw3lib.so mm_alloc.o list.o mm_test
