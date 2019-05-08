@@ -71,7 +71,7 @@ void *mm_realloc(void *ptr, size_t size) {
     void *extend = res + meta->size;
     memcpy(res, ptr, meta->size);
     memset(extend, 0, size - meta->size);
-    return NULL;
+    return res;
 }
 
 void mm_free(void *ptr) {
