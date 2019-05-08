@@ -41,7 +41,7 @@ int main() {
     int *data = (int*) mm_malloc(sizeof(int));
     assert(data != NULL);
     data[0] = 0x162;
-    int *chunk = (int *) mm_realloc(10*sizeof(int));
+    int *chunk = (int *) mm_realloc(data, 10*sizeof(int));
     chunk[1] = 0x163;
     chunk[2] = 0x233;
     mm_free(chunk);
