@@ -58,7 +58,7 @@ void *mm_malloc(size_t size) {
     header->free = 0;
     list_push_back(&blk_list, header);
 
-    void *address = (void *)header+METADATA_SIZE;
+    void *address = (void *)header+(void *)METADATA_SIZE;
 
     return address;
 }
