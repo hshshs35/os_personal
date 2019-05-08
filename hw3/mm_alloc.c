@@ -75,11 +75,11 @@ void mm_free(void *ptr) {
     void *start  = ptr;
     void *end = ptr + e->size;
 
-    if (e->prev != (&(&blk_list)->head) && e->prev->free == 1) {
+    if (e->prev != &blk_list.head && e->prev->free == 1) {
         start = (void *)e->prev;
         list_remove(e->prev);
     }
-    if (e->next != (&(&blk_list)->tail) && e->next->free == 1) {
+    if (e->next != &blk_list.tail && e->next->free == 1) {
         end = (void *)e->next + e->next->size;
         list_remove(e->next);
     }
