@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <assert.h>
 struct list_elem {
     size_t size;
     int free;

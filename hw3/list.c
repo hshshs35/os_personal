@@ -2,7 +2,7 @@
 
 void
 list_init (struct list *list) {
-    ASSERT (list != null)
+    assert(list != NULL);
     list->head.prev = NULL;
     list->head.next = &list->tail;
     list->tail.prev = &list->head;
@@ -25,7 +25,7 @@ list_insert (struct list_elem *before, struct list_elem *elem) {
 
 void
 list_push_back (struct list *list, struct list_elem *elem) {
-    list_insert (list->tail->prev, elem);
+    list_insert ((list->tail).prev, elem);
 }
 
 struct list_elem *

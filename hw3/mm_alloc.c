@@ -6,20 +6,29 @@
 
 #include "mm_alloc.h"
 #include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <string.h>
 #include "list.h"
 
+
 #define METADATA_SIZE sizeof(struct list_elem)
+#define _XOPEN_SOURCE_EXTENDED 1
 
 struct list blk_list;
-
-blk_list = list_init(&blk_list);
+int init = 0;
 
 void *mm_malloc(size_t size) {
     /* YOUR CODE HERE */
+    if (!init) {
+        list_init(&blk_list);
+        init = 1;
+    }
+
     struct list_elem *e;
     size_t allocate_size = size + METADATA_SIZE;
 
-    for (e = blk_list->head->next; e != blk_list->tail; e = e->next) {
+    for (e = blk_list.head.next; e != &blk_list.tail; e = e->next) {
         if ((!e->free) || e->size < size)
             continue;
 
@@ -39,7 +48,7 @@ void *mm_malloc(size_t size) {
         return e + METADATA_SIZE;
     }
 
-    void *header = sbrk(allocate_size);
+    struct list_elem *header = sbrk(allocate_size);
 
     if (header == (void *)-1)
         return NULL;
@@ -66,11 +75,11 @@ void mm_free(void *ptr) {
     void *start  = ptr;
     void *end = ptr + e->size;
 
-    if (e->prev != &blk_list->head && e->prev->free == 1) {
+    if (e->prev != (&(&blk_list)->head) && e->prev->free == 1) {
         start = (void *)e->prev;
         list_remove(e->prev);
     }
-    if (e->next != &blk_list->tail && e->next->free == 1) {
+    if (e->next != (&(&blk_list)->tail) && e->next->free == 1) {
         end = (void *)e->next + e->next->size;
         list_remove(e->next);
     }
