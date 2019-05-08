@@ -78,11 +78,11 @@ void mm_free(void *ptr) {
     /* YOUR CODE HERE */
     struct list_elem *e = ptr-METADATA_SIZE;
 
-    void *start  = ptr;
+    void *start  = e;
     void *end = ptr + e->size;
 
     if (e->prev != &blk_list.head && e->prev->free == 1) {
-        start = (void *)e->prev;
+        start = (void *)e->prev - METADATA_SIZE;
         list_remove(e->prev);
     }
     if (e->next != &blk_list.tail && e->next->free == 1) {
