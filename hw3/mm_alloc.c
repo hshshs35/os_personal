@@ -70,7 +70,6 @@ void *mm_realloc(void *ptr, size_t size) {
 void mm_free(void *ptr) {
     /* YOUR CODE HERE */
     struct list_elem *e = (struct list_elem *) ptr;
-    e->free = 1;
 
     void *start  = ptr;
     void *end = ptr + e->size;
