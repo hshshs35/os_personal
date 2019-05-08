@@ -59,6 +59,7 @@ void *mm_malloc(size_t size) {
     list_push_back(&blk_list, header);
 
     void *address = header+METADATA_SIZE;
+    int meta_size = sizeof(struct list_elem);
 
     return address;
 }
