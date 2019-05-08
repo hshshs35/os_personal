@@ -41,7 +41,10 @@ int main() {
     int *data = (int*) mm_malloc(sizeof(int));
     assert(data != NULL);
     data[0] = 0x162;
-    mm_free(data);
+    int *chunk = (int *) mm_realloc(10*sizeof(int));
+    chunk[1] = 0x163;
+    chunk[2] = 0x233;
+    mm_free(chunk);
     printf("malloc test successful!\n");
     return 0;
 }

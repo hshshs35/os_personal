@@ -66,7 +66,12 @@ void *mm_malloc(size_t size) {
 
 void *mm_realloc(void *ptr, size_t size) {
     /* YOUR CODE HERE */
-
+    struct list_elem *meta = ptr - METADATA_SIZE;
+    mm_free(void *ptr);
+    void *res = mm_malloc(size);
+    void *extend = res + meta->size;
+    memcpy(res, ptr, meta->size);
+    memset(extend, 0, size - meta->size);
     return NULL;
 }
 
